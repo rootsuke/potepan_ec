@@ -195,3 +195,12 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# rubocop
+.rubocop.yml
+.rubocop_todo.yml
+.rubocop_airbnb.yml
+
+# RSpec
+.rspec
+
