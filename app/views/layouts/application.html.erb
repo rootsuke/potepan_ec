@@ -3,12 +3,18 @@
   <head>
     <title>Potepanec</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= render "layouts/head" %>
+    <%= render "layouts/shim" %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="main-wrapper">
+      <%= render "layouts/header" %>
+      <%= yield %>
+      <%= render "layouts/footer" %>
+      <%= render "layouts/copy_right" %>
+    </div>
+    <%= render "layouts/modals" %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>
