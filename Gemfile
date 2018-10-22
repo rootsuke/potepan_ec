@@ -53,6 +53,7 @@ end
 group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'launchy', '~> 2.4.3'
 end
 
 group :development do
