@@ -1,5 +1,5 @@
 class Potepan::CategoriesController < ApplicationController
   def show
-    @taxonomies = Spree::Taxonomy.includes(:taxons)
+    @taxon = Spree::Taxon.find(params[:id])
   end
 end
