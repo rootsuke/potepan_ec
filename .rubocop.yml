@@ -10,7 +10,7 @@ AllCops:
     - 'config/**/*'
     - 'bin/*'
 
-# １業に150文字まで許可
+# １行に150文字まで許可
 Metrics/LineLength:
   Max: 150
 
