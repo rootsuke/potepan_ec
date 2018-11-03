@@ -94,22 +94,34 @@
               </ul>
               <div class="tab-content">
                 <div id="details" class="tab-pane fade in active">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p><%= @product.description %></p>
                   <ul class="list-unstyled">
-                    <li>Black, Crew Neck</li>
-                    <li>75% Cotton, 25% Rayon</li>
-                    <li>Waterbased Ink</li>
-                    <li>Wash Cold, dry low</li>
+                    <% @properties.each do |prop| %>
+                      <li><%= "#{prop.property.name} : #{prop.value}" %></li>
+                    <% end %>
                   </ul>
                 </div>
                 <div id="about-art" class="tab-pane fade">
                   <p>Nulla facilisi. Mauris efficitur, massa et iaculis accumsan, mauris velit ultrices purus, quis condimentum nibh dolor ut tortor. Donec egestas tortor quis mattis gravida. Ut efficitur elit vitae dignissim volutpat. </p>
                 </div>
                 <div id="sizing" class="tab-pane fade">
-                  <p>Praesent dui felis, gravida a auctor at, facilisis commodo ipsum. Cras eu faucibus justo. Nullam varius cursus nisi, sed elementum sem sagittis at. Nulla tellus massa, vestibulum a commodo facilisis, pulvinar convallis nunc.</p>
+                  <% if size = @product.property(:size) %>
+                    <p><%= size %></p>
+                  <% else %>
+                    <ul class="list-unstyled">
+                      <li>S</li>
+                      <li>M</li>
+                      <li>L</li>
+                      <li>XL</li>
+                    </ul>
+                  <% end %>
                 </div>
                 <div id="shipping" class="tab-pane fade">
-                  <p>Mauris lobortis augue ex, ut faucibus nisi mollis ac. Sed volutpat scelerisque ex ut ullamcorper. Cras at velit quis sapien dapibus laoreet a id odio. Sed sit amet accumsan ante, eu congue metus. Aenean eros tortor, cursus quis feugiat sed, vestibulum vel purus.</p>
+                  <ul class="list-unstyled">
+                    <% @shipping_methods.each do |shipping_method| %>
+                      <li><%= shipping_method.name %></li>
+                    <% end %>
+                  </ul>
                 </div>
               </div>
             </div>
