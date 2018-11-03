@@ -93,6 +93,7 @@
                 <li><a data-toggle="tab" href="#shipping">shipping</a></li>
               </ul>
               <div class="tab-content">
+                <%# 商品詳細を表示 %>
                 <div id="details" class="tab-pane fade in active">
                   <p><%= @product.description %></p>
                   <ul class="list-unstyled">
@@ -104,9 +105,12 @@
                 <div id="about-art" class="tab-pane fade">
                   <p>Nulla facilisi. Mauris efficitur, massa et iaculis accumsan, mauris velit ultrices purus, quis condimentum nibh dolor ut tortor. Donec egestas tortor quis mattis gravida. Ut efficitur elit vitae dignissim volutpat. </p>
                 </div>
+                <%# 商品のサイズ（寸法）を表示 %>
                 <div id="sizing" class="tab-pane fade">
+                  <%# product_propertiesにサイズが登録されている商品はサイズを表示 %>
                   <% if size = @product.property(:size) %>
                     <p><%= size %></p>
+                  <%# 衣服類はサイズが登録されていないため、S~XLと表示 %>
                   <% else %>
                     <ul class="list-unstyled">
                       <li>S</li>
@@ -117,6 +121,7 @@
                   <% end %>
                 </div>
                 <div id="shipping" class="tab-pane fade">
+                  <%# 商品の発送方法を表示 %>
                   <ul class="list-unstyled">
                     <% @shipping_methods.each do |shipping_method| %>
                       <li><%= shipping_method.name %></li>
