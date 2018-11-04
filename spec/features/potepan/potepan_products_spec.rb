@@ -18,7 +18,9 @@ RSpec.feature "Potepan::Products", type: :feature do
     expect(page).to have_content(product.name)
     expect(page).to have_content(product.description)
     expect(page).to have_content(product.display_price)
+    # productとproduct_propetyの関連付けはmodel_specにて検証済
     expect(page).to have_content(product_property.value)
+    # productとshipping_methodの関連付けはmodel_specにて検証済
     expect(page).to have_content(shipping_method.name)
     expect(page).to have_title("#{product.name} | BIGBAG Store")
     expect(current_path).to eq potepan_product_path(product.id)
