@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Potepan::Products", type: :feature do
   given(:product) { create(:product) }
+  given(:property) { create(:property) }
+  given!(:product_property) { create(:product_property, value: "red", product: product, property: property) }
+  given!(:shipping_method) { create(:shipping_method) }
 
   scenario "render index_page" do
     visit potepan_root_path
@@ -15,6 +18,8 @@ RSpec.feature "Potepan::Products", type: :feature do
     expect(page).to have_content(product.name)
     expect(page).to have_content(product.description)
     expect(page).to have_content(product.display_price)
+    expect(page).to have_content(product_property.value)
+    expect(page).to have_content(shipping_method.name)
     expect(page).to have_title("#{product.name} | BIGBAG Store")
     expect(current_path).to eq potepan_product_path(product.id)
   end
