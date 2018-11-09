@@ -32,7 +32,7 @@
 
                 <% @product.images.each_with_index do |image, i| %>
                   <div class="item <%= "active" if i.zero? %>" data-thumb="<%= i %>">
-                    <%= image_tag @product.images[i].attachment.url(:large) %>
+                    <%= image_tag image.attachment.url(:large) %>
                  </div>
                 <% end %>
 
@@ -44,7 +44,7 @@
 
                   <% @product.images.each_with_index do |image, i| %>
                     <div data-target="#carousel" data-slide-to="<%= i %>" class="thumb">
-                      <%= image_tag @product.images[i].attachment.url(:small) %>
+                      <%= image_tag image.attachment.url(:small) %>
                     </div>
                   <% end %>
 
