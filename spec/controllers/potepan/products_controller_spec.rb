@@ -24,11 +24,11 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     it "assigns @product_properties" do
-      expect(assigns(:properties).first).to eq product_property
+      expect(assigns(:properties)).to contain_exactly product_property
     end
 
     it "assigns @shipping_methods" do
-      expect(assigns(:shipping_methods).first).to eq shipping_method
+      expect(assigns(:shipping_methods)).to contain_exactly shipping_method
     end
 
     it "render show page" do
