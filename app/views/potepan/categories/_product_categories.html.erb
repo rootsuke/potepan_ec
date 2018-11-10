@@ -5,42 +5,37 @@
   <div class="panel-body">
     <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
       <ul class="nav navbar-nav side-nav">
-        <li>
-          <a href="javascript:;" data-toggle="collapse" data-target="#women">レディース<i class="fa fa-plus"></i></a>
-          <ul id="women" class="collapse collapseItem">
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>トップス <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>アウター <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>ボトムス <span>(25)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>靴 <span>(2)</span></a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="javascript:;" data-toggle="collapse" data-target="#men">メンズ<i class="fa fa-plus"></i></a>
-          <ul id="men" class="collapse collapseItem">
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>トップス <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>アウター <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>ボトムス <span>(25)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>靴 <span>(2)</span></a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="javascript:;" data-toggle="collapse" data-target="#kids">キッズ<i class="fa fa-plus"></i></a>
-          <ul id="kids" class="collapse collapseItem">
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>トップス <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>アウター <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>ボトムス <span>(25)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>靴 <span>(2)</span></a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="javascript:;" data-toggle="collapse" data-target="#accessories">アクセサリー<i class="fa fa-plus"></i></a>
-          <ul id="accessories" class="collapse collapseItem">
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>モバイルケース・アクセサリー <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>財布・革小物 <span>(6)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>腕時計 <span>(25)</span></a></li>
-            <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>帽子 <span>(2)</span></a></li>
-          </ul>
-        </li>
+
+        <% @taxonomies.each do |taxonomy| %>
+
+          <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#<%= taxonomy.name %>"><%= taxonomy.name %><i class="fa fa-plus"></i></a>
+            <ul id="<%= taxonomy.name %>" class="collapse collapseItem">
+              <% taxonomy.root.children.each do |taxon| %>
+                <li>
+                  <% if taxon.children.count.zero? %>
+                    <%= link_to potepan_category_path(taxon.id) do %>
+                      <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{taxon.name} (#{taxon.products.count})" %>
+                    <% end %>
+                  <% else %>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#<%= taxon.name %>"><%= taxon.name %><i class="fa fa-plus"></i></a>
+                    <ul id="<%= taxon.name %>" class="collapse collapseItem">
+                      <li>
+                        <% taxon.children.each do |t| %>
+                          <%= link_to potepan_category_path(t.id) do %>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{t.name} (#{t.products.count})" %>
+                          <% end %>
+                        <% end %>
+                      </li>
+                    </ul>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+
+        <% end %>
+
       </ul>
     </div>
   </div>
