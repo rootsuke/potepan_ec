@@ -191,6 +191,11 @@ a:hover, a:focus {
   flex-wrap: wrap;
 }
 
+// カテゴリーツリーの葉要素にインデントを付与
+.leaf {
+  margin-left: 15px;
+}
+
 /*================= 2. HOME ==================*/
 /*=== 2.1 HEADER ===*/
 .header {

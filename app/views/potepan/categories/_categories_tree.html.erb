@@ -13,7 +13,7 @@
             <ul id="<%= taxonomy.name %>" class="collapse collapseItem">
               <% taxonomy.root.children.each do |taxon| %>
                 <li>
-                  <% if taxon.children.count.zero? %>
+                  <% if taxon.leaf? %>
                     <%= link_to potepan_category_path(taxon.id) do %>
                       <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{taxon.name} (#{taxon.products.count})" %>
                     <% end %>
@@ -21,8 +21,8 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#<%= taxon.name %>"><%= taxon.name %><i class="fa fa-plus"></i></a>
                     <ul id="<%= taxon.name %>" class="collapse collapseItem">
                       <li>
-                        <% taxon.children.each do |t| %>
-                          <%= link_to potepan_category_path(t.id) do %>
+                        <% taxon.leaves.each do |t| %>
+                          <%= link_to potepan_category_path(t.id), class: "leaf" do %>
                             <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{t.name} (#{t.products.count})" %>
                           <% end %>
                         <% end %>
