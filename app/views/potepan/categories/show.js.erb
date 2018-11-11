@@ -1,0 +1,5 @@
+<% if @view_type == "grid" %>
+  $('#rendering_products').html("<%= escape_javascript(render 'grid_view') %>")
+<% else %>
+  $('#rendering_products').html("<%= escape_javascript(render 'list_view') %>")
+<% end %>

@@ -1,19 +1,13 @@
 <div class="row filterArea">
   <div class="col-xs-6">
-    <select name="guiest_id1" id="guiest_id1" class="select-drop">
-      <option value="0">並び替え</option>
-      <option value="1">人気順</option>
-      <option value="2">安い順</option>
-      <option value="3">新着順</option>
-      <option value="3">高い順</option>
-    </select>
+    <%= render "filter_area" %>
   </div>
   <div class="col-xs-6">
     <div class="btn-group pull-right" role="group">
-      <%= link_to potepan_category_path(@taxon.id, view_type: "grid"), class: "btn btn-default active" do %>
+      <%= link_to potepan_category_path(@taxon.id, view_type: "grid"), class: "btn btn-default active", remote: true do %>
         <i class="fa fa-th" aria-hidden="true"></i><span>Grid</span>
       <% end %>
-      <%= link_to potepan_category_path(@taxon.id, view_type: "list"), class: "btn btn-default" do %>
+      <%= link_to potepan_category_path(@taxon.id, view_type: "list"), class: "btn btn-default", remote: true do %>
         <i class="fa fa-th-list" aria-hidden="true"></i><span>List</span>
       <% end %>
     </div>
@@ -25,7 +19,7 @@
     <div class="col-sm-4 col-xs-12">
       <div class="productBox">
         <div class="productImage clearfix">
-          <%= image_tag(product.display_image.attachment.url, :alt => "products-img") %>
+          <%= image_tag(product.display_image.attachment.url, alt: "products-img") %>
           <div class="productMasking">
             <ul class="list-inline btn-group" role="group">
               <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart"></i></a></li>
@@ -35,7 +29,11 @@
           </div>
         </div>
         <div class="productCaption clearfix">
-          <a href="single_product.html">
+          <%# aタグの中にh5タグをerbで表現したい -> h5のcssスタイルが適用されてハッピー %>
+          <%# これだとh5タグの中にaタグが入ってる状態 %>
+          <%# リストの方も要修正 %>
+          <h5><%= link_to product.name, potepan_product_path(product.id) %></h5>
+          <a href="<%= potepan_product_path(product.id) %>">
             <h5><%= product.name %></h5>
           </a>
           <h3><%= product.display_price %></h3>
