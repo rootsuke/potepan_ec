@@ -13,12 +13,36 @@
       <%= render "size_filter" %>
       </div>
 
-      <div class="col-md-9 col-sm-8 col-xs-12" id="rendering_products">
-        <% if @view_type == "grid" %>
-          <%= render "grid_view" %>
-        <% else %>
-          <%= render "list_view" %>
-        <% end %>
+      <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row filterArea">
+          <div class="col-xs-6">
+            <select name="guiest_id1" id="guiest_id1" class="select-drop">
+              <option value="0">並び替え</option>
+              <option value="1">人気順</option>
+              <option value="2">安い順</option>
+              <option value="3">新着順</option>
+              <option value="3">高い順</option>
+            </select>
+          </div>
+          <div class="col-xs-6">
+            <div class="btn-group pull-right" role="group">
+              <%= link_to potepan_category_path(@taxon.id, view_type: "grid"), id: "grid_btn", class: "btn btn-default active", remote: true do %>
+                <i class="fa fa-th" aria-hidden="true"></i><span>Grid</span>
+              <% end %>
+              <%= link_to potepan_category_path(@taxon.id, view_type: "list"), id: "list_btn", class: "btn btn-default", remote: true do %>
+                <i class="fa fa-th-list" aria-hidden="true"></i><span>List</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div id="rendering_products">
+          <% if @view_type == "grid" %>
+            <%= render "grid_view" %>
+          <% else %>
+            <%= render "list_view" %>
+          <% end %>
+        </div>
 
       </div>
     </div>

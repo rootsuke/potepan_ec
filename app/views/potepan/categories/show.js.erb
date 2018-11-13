@@ -1,5 +1,9 @@
 <% if @view_type == "grid" %>
-  $('#rendering_products').html("<%= escape_javascript(render 'grid_view') %>")
+  $('#list_btn').removeClass("active");
+  $('#grid_btn').addClass("active");
+  $('#rendering_products').html("<%= escape_javascript(render 'grid_view') %>");
 <% else %>
-  $('#rendering_products').html("<%= escape_javascript(render 'list_view') %>")
+  $('#grid_btn').removeClass("active");
+  $('#list_btn').addClass("active");
+  $('#rendering_products').html("<%= escape_javascript(render 'list_view') %>");
 <% end %>

@@ -1,20 +1,3 @@
-<div class="row filterArea">
-  <div class="col-xs-6">
-    <%# ajax遷移後にスタイルが崩れる原因要調査 %>
-    <%= render "filter_area" %>
-  </div>
-  <div class="col-xs-6">
-    <div class="btn-group pull-right" role="group">
-      <%= link_to potepan_category_path(@taxon.id, view_type: "grid"), class: "btn btn-default", remote: true do %>
-        <i class="fa fa-th" aria-hidden="true"></i><span>Grid</span>
-      <% end %>
-      <%= link_to potepan_category_path(@taxon.id, view_type: "list"), class: "btn btn-default active", remote: true do %>
-        <i class="fa fa-th-list" aria-hidden="true"></i><span>List</span>
-      <% end %>
-    </div>
-  </div>
-</div>
-
 <div class="row productListSingle">
   <% @products.each do |product| %>
     <div class="col-xs-12">
