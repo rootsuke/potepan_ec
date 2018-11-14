@@ -32,7 +32,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     it "render show page" do
-      expect(response).to render_template "potepan/products/show"
+      expect(response).to render_template :show
     end
   end
 end
