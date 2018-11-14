@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Potepan::Products", type: :feature do
+RSpec.feature "Visiting Product Page", type: :feature do
   given(:product) { create(:product) }
   given(:property) { create(:property) }
   given!(:product_property) { create(:product_property, value: "red", product: product, property: property) }
