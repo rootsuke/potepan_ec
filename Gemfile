@@ -54,6 +54,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'launchy', '~> 2.4.3'
+  gem 'poltergeist'
 end
 
 group :development do
