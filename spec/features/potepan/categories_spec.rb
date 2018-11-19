@@ -38,7 +38,7 @@ RSpec.feature "Visiting Category Page", type: :feature do
 
   context "List view" do
     # jsを使ったテストはfont-awesomeがブラウザで読み込めずエラーが起こる
-    scenario "renderin by list_view" do
+    scenario "rendering by list_view" do
       click_link "List"
       within "#list_view" do
         products.each do |product|
