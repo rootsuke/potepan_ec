@@ -15,31 +15,35 @@ RSpec.feature "Visiting Category Page", type: :feature do
     visit potepan_category_path(taxon_clothing.id)
   end
 
-  scenario "render show_page" do
-    # save_and_open_page
-    expect(current_path).to eq potepan_category_path(taxon_clothing.id)
-    expect(page).to have_title "#{taxon_clothing.name} | BIGBAG Store"
-    # カテゴリーツリーがすべて表示されているか
-    within "#categories_tree" do
-      taxons.each do |taxon|
-        expect(page).to have_content taxon.name
+  context "Grid view" do
+    scenario "render show_page" do
+      expect(current_path).to eq potepan_category_path(taxon_clothing.id)
+      expect(page).to have_title "#{taxon_clothing.name} | BIGBAG Store"
+      # カテゴリーツリーがすべて表示されているか
+      within "#categories_tree" do
+        taxons.each do |taxon|
+          expect(page).to have_content taxon.name
+        end
       end
+      # デフォルトではgridボタンのクラスにactiveがついているか
+      within "#switching_view_btn" do
+        expect(page).to have_selector "a.active", text: "Grid"
+      end
+      within "#light_section_top" do
+        click_link "Home"
+      end
+      expect(page).to have_title "BIGBAG Store"
+      expect(current_path).to eq potepan_index_path
     end
-    # デフォルトではgridボタンのクラスにactiveがついているか
-    within "#switching_view_btn" do
-      expect(page).to have_selector "a.active", text: "Grid"
-    end
-    within "#light_section_top" do
-      click_link "Home"
-    end
-    expect(page).to have_title "BIGBAG Store"
-    expect(current_path).to eq potepan_index_path
   end
 
   context "List view" do
-    # jsを使ったテストはfont-awesomeがブラウザで読み込めずエラーが起こる
-    scenario "rendering by list_view" do
+    # jsを使ったテストはfont-awesomeがブラウザで読み込めずエラーが起こるためHTMLのテストのみ
+    scenario "rendering show_page" do
       click_link "List"
+      within "#switching_view_btn" do
+        expect(page).to have_selector "a.active", text: "List"
+      end
       within "#list_view" do
         products.each do |product|
           expect(page).to have_content product.name
