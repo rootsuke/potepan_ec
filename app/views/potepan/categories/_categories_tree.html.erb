@@ -1,22 +1,23 @@
-<%# 商品カテゴリーを指定する %>
-
+<%# 商品のカテゴリーツリーを作成する %>
 <div class="panel panel-default" id="categories_tree">
   <div class="panel-heading">商品カテゴリー</div>
   <div class="panel-body">
     <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
       <ul class="nav navbar-nav side-nav">
 
+        <%# taxonomyごとにカテゴリーツリーを作成する %>
         <% @taxonomies.each do |taxonomy| %>
-
           <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#<%= taxonomy.name %>"><%= taxonomy.name %><i class="fa fa-plus"></i></a>
             <ul id="<%= taxonomy.name %>" class="collapse collapseItem">
               <% taxonomy.root.children.each do |taxon| %>
                 <li>
+                  <%# taxonが子要素を持っていなければ、taxonへのリンクを表示 %>
                   <% if taxon.leaf? %>
                     <%= link_to potepan_category_path(taxon.id) do %>
                       <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{taxon.name} (#{taxon.products.count})" %>
                     <% end %>
+                  <%# taxonが子要素を持っていれば、そのカテゴリーツリーを作成 %>
                   <% else %>
                     <a href="javascript:;" data-toggle="collapse" data-target="#<%= taxon.name %>"><%= taxon.name %><i class="fa fa-plus"></i></a>
                     <ul id="<%= taxon.name %>" class="collapse collapseItem">
@@ -33,7 +34,6 @@
               <% end %>
             </ul>
           </li>
-
         <% end %>
 
       </ul>
