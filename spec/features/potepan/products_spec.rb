@@ -33,12 +33,13 @@ RSpec.feature "Visiting Product Page", type: :feature do
 
   scenario "seeing related_products" do
     visit potepan_product_path product.id
-    # 同じカテゴリーの商品だけ表示されているか
+    # 同じカテゴリーの関連商品だけ表示されているか
     within ".productsContent" do
       related_products.each do |related_product|
         expect(page).to have_content related_product.name
       end
       expect(page).not_to have_content not_related_product.name
+      expect(page).not_to have_content product.name
     end
   end
 end
