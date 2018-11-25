@@ -3,9 +3,6 @@ class Potepan::ProductsController < ApplicationController
     @product = Spree::Product.find(params[:id])
     @properties = @product.product_properties.includes(:property)
     @shipping_methods = @product.shipping_category.shipping_methods
-    @related_products = Spree::Product.
-      includes(:classifications, master: [:images, :default_price]).
-      where("spree_products_taxons.taxon_id": @product.taxons).
-      where.not(id: @product.id).limit(4)
+    @related_products = Spree::Product.related_products_of(@product)
   end
 end
