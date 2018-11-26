@@ -39,9 +39,9 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     describe "Related_products" do
-      let!(:related_products)   { create_list(:product, 4, taxons: [related_taxon]) }
+      let!(:related_products)    { create_list(:product, 4, taxons: [related_taxon]) }
       let!(:not_related_product) { create(:product,         taxons: [not_related_taxon]) }
-      let(:not_related_taxon)   { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
+      let(:not_related_taxon)    { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
 
       it "does not include not_related_product" do
         expect(assigns(:related_products)).not_to contain_exactly not_related_product
@@ -58,7 +58,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
       end
 
       context "related_taxon has 5 products" do
-        let!(:related_products_5) { create(:product, taxon: [related_taxon]) }
+        let!(:related_products_5) { create(:product, taxons: [related_taxon]) }
 
         it "assigns @related_products" do
           expect(assigns(:related_products)).to eq related_products
