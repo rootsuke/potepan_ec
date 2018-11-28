@@ -2,25 +2,29 @@
 <div class="row featuredCollection">
   <div class="col-xs-12">
     <div class="page-header">
-      <h4>人気カテゴリー</h4>
+      <h4>人気カテゴリー（写真はイメージです）</h4>
     </div>
   </div>
   <div class="col-sm-4 col-xs-12">
-    <div class="thumbnail" onclick="location.href='single_product.html';">
+    <div class="thumbnail" onclick="location.href='<%= potepan_product_path(3) %>';">
       <div class="imageWrapper">
         <%= image_tag("home/featured-collection/featured-collection-01.jpg", :alt => "feature-collection-image") %>
-        <div class="masking"><a href="product_grid_left_sidebar.html" class="btn viewBtn">View Shirts</a></div>
+        <div class="masking">
+          <%= link_to "View Clothing", potepan_category_path(5), class: "btn viewBtn" %>
+        </div>
       </div>
       <div class="caption">
-        <h4>Shirts</h4>
+        <h4>Clothing</h4>
       </div>
     </div>
   </div>
   <div class="col-sm-4 col-xs-12">
-    <div class="thumbnail" onclick="location.href='single_product.html';">
+    <div class="thumbnail" onclick="location.href='<%= potepan_product_path(1) %>';">
       <div class="imageWrapper">
         <%= image_tag("home/featured-collection/featured-collection-02.jpg", :alt => "feature-collection-image") %>
-        <div class="masking"><a href="product_grid_left_sidebar.html" class="btn viewBtn">View Bags</a></div>
+        <div class="masking">
+          <%= link_to "View Bags", potepan_category_path(3), class: "btn viewBtn" %>
+        </div>
       </div>
       <div class="caption">
         <h4>Bags</h4>
@@ -28,13 +32,15 @@
     </div>
   </div>
   <div class="col-sm-4 col-xs-12">
-    <div class="thumbnail" onclick="location.href='single_product.html';">
+    <div class="thumbnail" onclick="location.href='<%= potepan_product_path(8) %>';">
       <div class="imageWrapper">
         <%= image_tag("home/featured-collection/featured-collection-03.jpg", :alt => "feature-collection-image") %>
-        <div class="masking"><a href="product_grid_left_sidebar.html" class="btn viewBtn">View Lifestyle</a></div>
+        <div class="masking">
+          <%= link_to "View Mags", potepan_category_path(4), class: "btn viewBtn" %>
+        </div>
       </div>
       <div class="caption">
-        <h4>Lifestyle</h4>
+        <h4>Mags</h4>
       </div>
     </div>
   </div>
