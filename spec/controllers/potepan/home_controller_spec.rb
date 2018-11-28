@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Potepan::HomeController, type: :controller do
-  let(:product_old)           { create(:product, available_on: 2.days.ago) }
+  let(:product_oldest)        { create(:product, available_on: 2.days.ago) }
+  let(:product_old)           { create(:product, available_on: 1.day.ago) }
   let(:product_new)           { create(:product, available_on: DateTime.now) }
   let(:product_not_available) { create(:product, available_on: 2.days.since) }
 
@@ -24,7 +25,7 @@ RSpec.describe Potepan::HomeController, type: :controller do
 
     describe "available_products" do
       it "assigns @available_products" do
-        expect(assigns(:available_products)).to eq [product_new, product_old]
+        expect(assigns(:available_products)).to eq [product_new, product_old, product_oldest]
       end
 
       it "not include product_not_available" do
