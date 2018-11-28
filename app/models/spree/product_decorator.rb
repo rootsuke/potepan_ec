@@ -12,5 +12,6 @@ Spree::Product.class_eval do
     includes(master: [:images, :default_price]).where(id: product.related_products_ids)
   end
 
+  # 購入可能な商品を新しい順に商品を取得する
   scope :new_arrival, -> { where("available_on <= ?", DateTime.now).order(available_on: :desc) }
 end
