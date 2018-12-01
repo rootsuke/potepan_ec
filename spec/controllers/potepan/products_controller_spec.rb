@@ -49,7 +49,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
 
       context "related_taxon has 4 products" do
         it "assigns @related_products" do
-          expect(assigns(:related_products)).to eq related_products
+          expect(assigns(:related_products)).to match_array related_products
         end
 
         it "the number of related_products is 4" do
@@ -59,10 +59,6 @@ RSpec.describe Potepan::ProductsController, type: :controller do
 
       context "related_taxon has 5 products" do
         let!(:related_products_5) { create(:product, taxons: [related_taxon]) }
-
-        it "assigns @related_products" do
-          expect(assigns(:related_products)).to eq related_products
-        end
 
         it "the number of related_products is 4" do
           expect(assigns(:related_products).count).to eq 4
