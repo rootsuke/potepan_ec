@@ -3,22 +3,23 @@ require 'rails_helper'
 RSpec.feature "Visiting Category Page", type: :feature do
   let!(:taxonomy) { create(:taxonomy, name: "Category") }
   let(:taxon_clothing) { create(:taxon, name: "Clothing", parent: taxonomy.root, taxonomy: taxonomy) }
-  let(:taxon_shirts) { create(:taxon, name: "Shirts", parent: taxon_clothing, taxonomy: taxonomy) }
-  let(:taxon_jacket) { create(:taxon, name: "Jacket", parent: taxon_clothing, taxonomy: taxonomy) }
-  let(:taxons) { [taxonomy.root, taxon_clothing, taxon_shirts, taxon_jacket] }
-  let!(:rails_shirts) { create(:product, name: "Rails Shirts", taxons: [taxon_shirts]) }
-  let!(:java_shirts) { create(:product, name: "Java Shirts", taxons: [taxon_shirts]) }
+  let(:taxon_shirt) { create(:taxon, name: "Shirts", parent: taxon_clothing, taxonomy: taxonomy) }
+  let(:taxon_jacket) { create(:taxon, name: "Jackets", parent: taxon_clothing, taxonomy: taxonomy) }
+  let(:taxons) { [taxonomy.root, taxon_clothing, taxon_shirt, taxon_jacket] }
+
+  let!(:rails_shirt) { create(:product, name: "Rails Shirt", taxons: [taxon_shirt]) }
+  let!(:java_shirt) { create(:product, name: "Java Shirt", taxons: [taxon_shirt]) }
   let!(:php_jacket) { create(:product, name: "PHP Jacket", taxons: [taxon_jacket]) }
-  let(:products) { [rails_shirts, java_shirts, php_jacket] }
+  let(:products) { [rails_shirt, java_shirt, php_jacket] }
 
   background do
-    visit potepan_index_path
-    within "#link_to_grid_view" do
-      click_link "All Categories"
-    end
+    visit potepan_category_path taxonomy.root.id
   end
 
   scenario "render show_page" do
+    within "#link_to_grid_view" do
+      click_link "All Categories"
+    end
     expect(current_path).to eq potepan_category_path(taxonomy.root.id)
     expect(page).to have_title "#{taxonomy.root.name} | BIGBAG Store"
     # カテゴリーツリーがすべて表示されているか
@@ -80,10 +81,8 @@ RSpec.feature "Visiting Category Page", type: :feature do
         end
         # shirtsカテゴリーの商品だけ表示されているか
         within "#grid_view" do
-          expect(page).to have_content rails_shirts.name
-          expect(page).to have_content java_shirts.name
-        end
-        within "#grid_view" do
+          expect(page).to have_content rails_shirt.name
+          expect(page).to have_content java_shirt.name
           expect(page).not_to have_content php_jacket.name
         end
       end
