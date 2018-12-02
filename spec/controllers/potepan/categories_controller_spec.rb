@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Potepan::CategoriesController, type: :controller do
   describe "GET #show" do
-    let(:taxonomy)    { create(:taxonomy, name: "Category") }
-    let(:taxon)       { create(:taxon,    name: "Clothing", taxonomy: taxonomy, parent: taxonomy.root) }
-    let(:taxon_child) { create(:taxon,    name: "T-Shirts", taxonomy: taxonomy, parent: taxon) }
-    let!(:product)    { create(:product,  name: "Rails T-Shirts", taxons: [taxon_child]) }
+    let(:taxonomy) { create(:taxonomy, name: "Category") }
+    let(:taxon)    { create(:taxon,    name: "Clothing", taxonomy: taxonomy, parent: taxonomy.root) }
+    let(:taxon_child) { create(:taxon, name: "T-Shirts", taxonomy: taxonomy, parent: taxon) }
+    let!(:product) { create(:product, name: "Rails T-Shirts", taxons: [taxon_child]) }
 
     before do
       get :show, params: { id: taxon.id }
@@ -13,7 +13,6 @@ RSpec.describe Potepan::CategoriesController, type: :controller do
 
     it "returns http success" do
       expect(response).to have_http_status :success
-      # binding.pry
     end
 
     it "returns 200 response" do
