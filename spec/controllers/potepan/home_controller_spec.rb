@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Potepan::HomeController, type: :controller do
-  let(:product_oldest)        { create(:product, available_on: 2.days.ago) }
-  let(:product_old)           { create(:product, available_on: 1.day.ago) }
-  let(:product_new)           { create(:product, available_on: DateTime.now) }
-  let(:product_not_available) { create(:product, available_on: 2.days.since) }
+  let!(:product_oldest)      { create(:product, available_on: 2.days.ago) }
+  let!(:product_old)         { create(:product, available_on: 1.day.ago) }
+  let!(:product_new)         { create(:product, available_on: DateTime.now) }
+  let!(:not_arrival_product) { create(:product, available_on: 2.days.since) }
 
   describe "#index" do
     before do
@@ -23,13 +23,13 @@ RSpec.describe Potepan::HomeController, type: :controller do
       expect(response).to render_template :index
     end
 
-    describe "available_products" do
-      it "assigns @available_products" do
-        expect(assigns(:available_products)).to eq [product_new, product_old, product_oldest]
+    describe "new_arrival_products" do
+      it "assigns @new_arrival_products" do
+        expect(assigns(:new_arrival_products)).to eq [product_new, product_old, product_oldest]
       end
 
-      it "not include product_not_available" do
-        expect(assigns(:available_products)).not_to contain_exactly product_not_available
+      it "don't include not_arrival_product" do
+        expect(assigns(:new_arrival_products)).not_to contain_exactly not_arrival_product
       end
     end
   end

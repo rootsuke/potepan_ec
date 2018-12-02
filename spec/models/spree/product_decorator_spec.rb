@@ -36,14 +36,14 @@ RSpec.describe Spree::Product, type: :model do
   describe "scope: new_arrival" do
     subject { Spree::Product.new_arrival }
 
-    let(:product_oldest)        { create(:product, available_on: 2.days.ago) }
-    let(:product_old)           { create(:product, available_on: 1.day.ago) }
-    let(:product_new)           { create(:product, available_on: DateTime.now) }
-    let(:product_not_available) { create(:product, available_on: 2.days.since) }
+    let(:product_oldest)       { create(:product, available_on: 2.days.ago) }
+    let(:product_old)          { create(:product, available_on: 1.day.ago) }
+    let(:product_new)          { create(:product, available_on: DateTime.now) }
+    let!(:not_arrival_product) { create(:product, available_on: 2.days.since) }
 
     it { is_expected.to eq [product_new, product_old, product_oldest] }
 
-    it { is_expected.not_to contain_exactly product_not_available }
+    it { is_expected.not_to contain_exactly not_arrival_product }
   end
 
   describe "scope: includes_images_and_price" do
