@@ -20,4 +20,5 @@ Airbnb/OptArgParameters:
 
 # product_decoratorに定数を定義できるようにするため
 Airbnb/ConstAssignedInWrongFile:
-  Enabled: false
+  Exclude:
+    - 'app/models/spree/*'
