@@ -17,3 +17,7 @@ Metrics/LineLength:
 # キーワード引数以外も使用可
 Airbnb/OptArgParameters:
   Enabled: false
+
+# product_decoratorに定数を定義できるようにするため
+Airbnb/ConstAssignedInWrongFile:
+  Enabled: false
