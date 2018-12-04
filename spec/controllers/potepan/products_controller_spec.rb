@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Potepan::ProductsController, type: :controller do
   describe "#show" do
-    let(:product)           { create(:product, taxons: [related_taxon]) }
-    let(:property)          { create(:property) }
+    let(:product) { create(:product, taxons: [related_taxon]) }
+    let(:property) { create(:property) }
     let!(:product_property) { create(:product_property, value: "red", product: product, property: property) }
-    let!(:shipping_method)  { create(:shipping_method) }
+    let!(:shipping_method) { create(:shipping_method) }
+    let!(:related_products) { create_list(:product, 4, taxons: [related_taxon]) }
+    let!(:not_related_product) { create(:product, taxons: [not_related_taxon]) }
 
-    let(:taxonomy)      { create(:taxonomy) }
+    let(:taxonomy) { create(:taxonomy) }
     let(:related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
+    let(:not_related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
 
     before do
       get :show, params: { id: product.id }
@@ -39,10 +42,6 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     describe "Related_products" do
-      let!(:related_products)    { create_list(:product, 4, taxons: [related_taxon]) }
-      let!(:not_related_product) { create(:product,         taxons: [not_related_taxon]) }
-      let(:not_related_taxon)    { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
-
       it "does not include not_related_product" do
         expect(assigns(:related_products)).not_to contain_exactly not_related_product
       end
