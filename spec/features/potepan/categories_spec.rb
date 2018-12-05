@@ -45,20 +45,42 @@ RSpec.feature "Visiting Category Page", type: :feature do
     expect(current_path).to eq potepan_index_path
   end
 
-  # jsを使ったテストはfont-awesomeがブラウザで読み込めずエラーが起こるためHTMLのテストのみ
-  scenario "switch view_type by Switching_view_btn" do
-    click_link "List"
-    within "#switching_view_btn" do
-      expect(page).to have_selector "a.active", text: "List"
-    end
-    within "#list_view" do
-      products.each do |product|
-        expect(page).to have_content product.name
+  feature "Switching_view_btn" do
+    context "by HTML" do
+      scenario "switch view_type" do
+        click_link "List"
+        within "#switching_view_btn" do
+          expect(page).to have_selector "a.active", text: "List"
+        end
+        within "#list_view" do
+          products.each do |product|
+            expect(page).to have_content product.name
+          end
+        end
+        click_link "Grid"
+        within "#switching_view_btn" do
+          expect(page).to have_selector "a.active", text: "Grid"
+        end
       end
     end
-    click_link "Grid"
-    within "#switching_view_btn" do
-      expect(page).to have_selector "a.active", text: "Grid"
+
+    context "by Ajax" do
+      scenario "switch view_type", js: true do
+        click_link "List"
+        within "#switching_view_btn" do
+          expect(page).to have_selector "a.active", text: "LIST"
+        end
+        within "#list_view" do
+          products.each do |product|
+            # テストブラウザでは大文字、小文字まで検証されるため大文字に変換しておく
+            expect(page).to have_content product.name.upcase
+          end
+        end
+        click_link "Grid"
+        within "#switching_view_btn" do
+          expect(page).to have_selector "a.active", text: "GRID"
+        end
+      end
     end
   end
 
