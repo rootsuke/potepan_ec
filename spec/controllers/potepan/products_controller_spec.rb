@@ -43,7 +43,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
 
     describe "Related_products" do
       it "does not include not_related_product" do
-        expect(assigns(:related_products)).not_to contain_exactly not_related_product
+        expect(assigns(:related_products)).not_to include not_related_product
       end
 
       context "related_taxon has 4 products" do
