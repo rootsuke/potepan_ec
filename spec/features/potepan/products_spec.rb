@@ -39,5 +39,7 @@ RSpec.feature "Visiting Product Page", type: :feature do
       expect(page).not_to have_content not_related_product.name
       expect(page).not_to have_content product.name
     end
+    click_link related_products.first.name
+    expect(current_path).to eq potepan_product_path related_products.first.id
   end
 end
