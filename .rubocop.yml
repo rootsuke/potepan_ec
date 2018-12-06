@@ -22,3 +22,8 @@ Airbnb/OptArgParameters:
 Airbnb/ConstAssignedInWrongFile:
   Exclude:
     - 'app/models/spree/*'
+
+# product_decoratorにメソッドを定義できるようにするため
+Airbnb/ModuleMethodInWrongFile:
+  Exclude:
+    - 'app/models/spree/*'
