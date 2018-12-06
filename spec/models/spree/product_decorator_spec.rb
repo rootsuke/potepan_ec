@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Spree::Product, type: :model do
-  let(:product)              { create(:product, taxons: [related_taxon]) }
-  let!(:related_products)    { create_list(:product, 4, taxons: [related_taxon]) }
+  let(:product) { create(:product, taxons: [related_taxon]) }
+  let!(:related_products) { create_list(:product, 4, taxons: [related_taxon]) }
   let!(:not_related_product) { create(:product, taxons: [not_related_taxon]) }
 
-  let(:taxonomy)          { create(:taxonomy) }
-  let(:related_taxon)     { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
+  let(:taxonomy) { create(:taxonomy) }
+  let(:related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
   let(:not_related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
 
   describe "Scope: related_products_of" do
