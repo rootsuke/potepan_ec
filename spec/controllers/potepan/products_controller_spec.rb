@@ -42,6 +42,10 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     describe "Related_products" do
+      it "does not include self_product" do
+        expect(assigns(:related_products)).not_to include product
+      end
+
       it "does not include not_related_product" do
         expect(assigns(:related_products)).not_to include not_related_product
       end
