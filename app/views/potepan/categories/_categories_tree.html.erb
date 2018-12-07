@@ -1,0 +1,42 @@
+<%# 商品のカテゴリーツリーを作成する %>
+<div class="panel panel-default" id="categories_tree">
+  <div class="panel-heading">商品カテゴリー</div>
+  <div class="panel-body">
+    <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+      <ul class="nav navbar-nav side-nav">
+
+        <%# taxonomyごとにカテゴリーツリーを作成する %>
+        <% @taxonomies.each do |taxonomy| %>
+          <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#<%= "taxonomy-#{taxonomy.id}" %>"><%= taxonomy.name %><i class="fa fa-plus"></i></a>
+            <ul id="<%= "taxonomy-#{taxonomy.id}" %>" class="collapse collapseItem">
+              <% taxonomy.root.children.each do |taxon| %>
+                <li>
+                  <%# taxonが子要素を持っていなければ、taxonへのリンクを表示 %>
+                  <% if taxon.leaf? %>
+                    <%= link_to potepan_category_path(taxon.id) do %>
+                      <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{taxon.name} (#{taxon.products.count})" %>
+                    <% end %>
+                  <%# taxonが子要素を持っていれば、そのカテゴリーツリーを作成 %>
+                  <% else %>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#<%= "taxon-#{taxon.id}" %>"><%= taxon.name %><i class="fa fa-plus"></i></a>
+                    <ul id="<%= "taxon-#{taxon.id}" %>" class="collapse collapseItem">
+                      <li>
+                        <% taxon.leaves.each do |leaf| %>
+                          <%= link_to potepan_category_path(leaf.id), class: "leaf" do %>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= "#{leaf.name} (#{leaf.products.count})" %>
+                          <% end %>
+                        <% end %>
+                      </li>
+                    </ul>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
+</div>

@@ -54,6 +54,9 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'launchy', '~> 2.4.3'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'poltergeist'
 end
 
 group :development do

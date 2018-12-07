@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "Visiting Product Page", type: :feature do
-  given(:product) { create(:product) }
-  given(:property) { create(:property) }
+  given(:product)           { create(:product) }
+  given(:property)          { create(:property) }
   given!(:product_property) { create(:product_property, value: "red", product: product, property: property) }
-  given!(:shipping_method) { create(:shipping_method) }
+  given!(:shipping_method)  { create(:shipping_method) }
+  given!(:taxonomy)         { create(:taxonomy, name: "Category") }
 
   scenario "render show_page and index_page" do
     visit potepan_product_path product.id

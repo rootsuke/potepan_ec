@@ -185,6 +185,17 @@ a:hover, a:focus {
   cursor: pointer;
 }
 
+// グリッドシステムの縦ずれへの対処 
+.equal-height{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// カテゴリーツリーの葉要素にインデントを付与
+.leaf {
+  margin-left: 15px;
+}
+
 /*================= 2. HOME ==================*/
 /*=== 2.1 HEADER ===*/
 .header {

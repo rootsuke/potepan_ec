@@ -9,6 +9,7 @@ require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'spree/testing_support/factories'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -64,4 +65,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
+
+  Capybara.javascript_driver = :selenium_chrome
 end

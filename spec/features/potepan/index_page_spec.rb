@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Visiting Index Page", type: :feature do
+  let!(:taxonomy) { create(:taxonomy, name: "Category") }
+
   scenario "render successfully" do
     visit potepan_root_path
     click_link "Home"

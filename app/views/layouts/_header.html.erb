@@ -88,20 +88,20 @@
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Shop</a>
             <ul class="dropdown-menu row">
               <li class="col-sm-3 col-xs-12">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" id="link_to_grid_view">
                   <li>Products Grid View</li>
-                  <li><a href="product_grid_left_sidebar.html">Products Sidebar Left</a></li>
-                  <li><a href="product-grid-right-sidebar.html">Products Sidebar Right</a></li>
-                  <li><a href="product-grid-3-col-filter.html">Products 3 Columns V1</a></li>
-                  <li><a href="product-grid-3-col.html">Products 3 Columns V2</a></li>
-                  <li><a href="product-grid-4-col.html">Products 4 Columns</a></li>
+                  <li><%= link_to "All Categories", potepan_category_path(Spree::Taxon.first.id, view_type: "grid") %></li>
+                  <li><a href="#">Products Sidebar Right</a></li>
+                  <li><a href="#">Products 3 Columns V1</a></li>
+                  <li><a href="#">Products 3 Columns V2</a></li>
+                  <li><a href="#">Products 4 Columns</a></li>
                 </ul>
               </li>
               <li class="col-sm-3 col-xs-12">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" id="link_to_list_view">
                   <li>Products List View</li>
-                  <li><a href="product_list_left_sidebar.html">Products Sidebar Left</a></li>
-                  <li><a href="product-list-right-sidebar.html">Products Sidebar Right</a></li>
+                  <li><%= link_to "All Categories", potepan_category_path(Spree::Taxon.first.id, view_type: "list") %></li>
+                  <li><a href="#">Products Sidebar Right</a></li>
                   <li class="listHeading">Others</li>
                   <li class="active"><a href="single_product.html">Single Product</a></li>
                   <li><a href="cart_page.html">Cart Page</a></li>
