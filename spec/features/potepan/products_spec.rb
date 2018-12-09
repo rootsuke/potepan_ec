@@ -12,8 +12,11 @@ RSpec.feature "Visiting Product Page", type: :feature do
   given(:related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
   given(:not_related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
 
-  scenario "render show_page and index_page" do
+  background do
     visit potepan_product_path product.id
+  end
+  
+  scenario "render show_page and index_page" do
     expect(current_path).to eq potepan_product_path(product.id)
     expect(page).to have_title "#{product.name} | BIGBAG Store"
     within ".singleProduct" do
@@ -32,7 +35,6 @@ RSpec.feature "Visiting Product Page", type: :feature do
   end
 
   scenario "seeing related_products" do
-    visit potepan_product_path product.id
     # 同じカテゴリーの関連商品が４つだけ表示されているか
     within ".productsContent" do
       expect(page).to have_selector ".related_product", count: 4
@@ -41,5 +43,10 @@ RSpec.feature "Visiting Product Page", type: :feature do
     end
     click_link related_products.first.name
     expect(current_path).to eq potepan_product_path related_products.first.id
+  end
+
+  scenario "link to category page" do
+    click_link "一覧ページへ戻る"
+    expect(current_path).to eq potepan_category_path product.taxons.first.id
   end
 end
