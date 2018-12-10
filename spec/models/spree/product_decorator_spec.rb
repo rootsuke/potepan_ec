@@ -31,13 +31,5 @@ RSpec.describe Spree::Product, type: :model do
         expect(subject.count).to eq 4
       end
     end
-
-    describe "related_products_ids" do
-      subject { product.related_products_ids }
-
-      it { is_expected.not_to include not_related_product.id }
-
-      it { is_expected.not_to include product.id }
-    end
   end
 end
