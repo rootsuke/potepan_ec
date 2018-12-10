@@ -15,7 +15,7 @@ RSpec.feature "Visiting Product Page", type: :feature do
   background do
     visit potepan_product_path product.id
   end
-  
+
   scenario "render show_page and index_page" do
     expect(current_path).to eq potepan_product_path(product.id)
     expect(page).to have_title "#{product.name} | BIGBAG Store"
