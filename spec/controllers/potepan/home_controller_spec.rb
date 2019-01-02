@@ -29,7 +29,7 @@ RSpec.describe Potepan::HomeController, type: :controller do
       end
 
       it "don't include not_arrival_product" do
-        expect(assigns(:new_arrival_products)).not_to contain_exactly not_arrival_product
+        expect(assigns(:new_arrival_products)).not_to include not_arrival_product
       end
     end
   end
