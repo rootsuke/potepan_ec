@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "Visiting Category Page", type: :feature do
-  let!(:taxonomy) { create(:taxonomy, name: "Category") }
-  let(:taxon_clothing) { create(:taxon, name: "Clothing", parent: taxonomy.root, taxonomy: taxonomy) }
-  let(:taxon_shirt) { create(:taxon, name: "Shirts", parent: taxon_clothing, taxonomy: taxonomy) }
-  let(:taxon_jacket) { create(:taxon, name: "Jackets", parent: taxon_clothing, taxonomy: taxonomy) }
-  let(:taxons) { [taxonomy.root, taxon_clothing, taxon_shirt, taxon_jacket] }
+  let!(:taxonomy)      { create(:taxonomy, name: "Category") }
+  let(:taxon_clothing) { create(:taxon,    name: "Clothing", parent: taxonomy.root,  taxonomy: taxonomy) }
+  let(:taxon_shirt)    { create(:taxon,    name: "Shirts",   parent: taxon_clothing, taxonomy: taxonomy) }
+  let(:taxon_jacket)   { create(:taxon,    name: "Jackets",  parent: taxon_clothing, taxonomy: taxonomy) }
+  let(:taxons)         { [taxonomy.root, taxon_clothing, taxon_shirt, taxon_jacket] }
 
   let!(:rails_shirt) { create(:product, name: "Rails Shirt", taxons: [taxon_shirt]) }
-  let!(:java_shirt) { create(:product, name: "Java Shirt", taxons: [taxon_shirt]) }
-  let!(:php_jacket) { create(:product, name: "PHP Jacket", taxons: [taxon_jacket]) }
-  let(:products) { [rails_shirt, java_shirt, php_jacket] }
+  let!(:java_shirt)  { create(:product, name: "Java Shirt",  taxons: [taxon_shirt]) }
+  let!(:php_jacket)  { create(:product, name: "PHP Jacket",  taxons: [taxon_jacket]) }
+  let(:products)     { [rails_shirt, java_shirt, php_jacket] }
 
   background do
     visit potepan_category_path taxonomy.root.id

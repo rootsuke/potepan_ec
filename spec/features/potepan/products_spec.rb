@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.feature "Visiting Product Page", type: :feature do
-  given(:product) { create(:product, taxons: [related_taxon]) }
-  given!(:related_products) { create_list(:product, 5, taxons: [related_taxon]) }
-  given!(:not_related_product) { create(:product, taxons: [not_related_taxon]) }
-  given(:property) { create(:property) }
-  given!(:product_property) { create(:product_property, value: "red", product: product, property: property) }
-  given!(:shipping_method) { create(:shipping_method) }
+  given(:product)              { create(:product,         taxons: [related_taxon]) }
+  given!(:not_related_product) { create(:product,         taxons: [not_related_taxon]) }
+  given!(:related_products)    { create_list(:product, 5, taxons: [related_taxon]) }
+  given(:property)             { create(:property) }
+  given!(:product_property)    { create(:product_property, value: "red", product: product, property: property) }
+  given!(:shipping_method)     { create(:shipping_method) }
 
-  given!(:taxonomy) { create(:taxonomy) }
-  given(:related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
+  given!(:taxonomy)         { create(:taxonomy) }
+  given(:related_taxon)     { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
   given(:not_related_taxon) { create(:taxon, parent: taxonomy.root, taxonomy: taxonomy) }
 
   background do
