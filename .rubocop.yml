@@ -17,3 +17,13 @@ Metrics/LineLength:
 # キーワード引数以外も使用可
 Airbnb/OptArgParameters:
   Enabled: false
+
+# product_decoratorに定数を定義できるようにするため
+Airbnb/ConstAssignedInWrongFile:
+  Exclude:
+    - 'app/models/spree/*'
+
+# product_decoratorにメソッドを定義できるようにするため
+Airbnb/ModuleMethodInWrongFile:
+  Exclude:
+    - 'app/models/spree/*'
