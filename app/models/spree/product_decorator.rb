@@ -14,4 +14,8 @@ Spree::Product.class_eval do
 
   # 購入可能な商品を新しい順に商品を取得する
   scope :new_arrival, -> { where("available_on <= ?", DateTime.now).order(available_on: :desc) }
+
+  scope :filter_by_option, -> (option_value) do
+    joins(variants: :option_values).where(spree_option_values: { presentation: option_value }) if option_value.present?
+  end
 end

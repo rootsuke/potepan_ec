@@ -26,10 +26,10 @@
           </div>
           <div class="col-xs-6">
             <div class="btn-group pull-right" id="switching_view_btn" role="group">
-              <%= link_to potepan_category_path(@taxon.id, view_type: "grid"), id: "grid_btn", class: "btn btn-default #{"active" if @view_type == "grid"}", remote: true do %>
+              <%= link_to potepan_category_path(@taxon.id, view_type: "grid", option_type: params[:option_type], option_value: params[:option_value]), id: "grid_btn", class: "btn btn-default #{"active" if @view_type == "grid"}", remote: true do %>
                 <i class="fa fa-th" aria-hidden="true"></i><span>Grid</span>
               <% end %>
-              <%= link_to potepan_category_path(@taxon.id, view_type: "list"), id: "list_btn", class: "btn btn-default #{"active" if @view_type == "list"}", remote: true do %>
+              <%= link_to potepan_category_path(@taxon.id, view_type: "list", option_type: params[:option_type], option_value: params[:option_value]), id: "list_btn", class: "btn btn-default #{"active" if @view_type == "list"}", remote: true do %>
                 <i class="fa fa-th-list" aria-hidden="true"></i><span>List</span>
               <% end %>
             </div>

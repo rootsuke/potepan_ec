@@ -1,9 +1,20 @@
 <div class="row productListSingle" id="list_view">
-  <% @products.each do |product| %>
+  <% if @products.empty? %>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="products-not-found">
+        <h3>商品が見つかりませんでした</h3>
+      </div>
+    </div>
+  <% end %>
+  <% @products.each_with_index do |product, i| %>
     <div class="col-xs-12">
       <div class="media">
         <div class="media-left">
-          <%= image_tag(product.display_image.attachment.url, class: "media-object", alt: "Image") %>
+          <% if params[:option_type] == "color" %>
+            <%= image_tag(@variants[i].display_image.attachment.url, class: "media-object", alt: "Image") %>
+          <% else %>
+            <%= image_tag(product.display_image.attachment.url, class: "media-object", alt: "Image") %>
+          <% end %>
           <span class="maskingImage"><a data-toggle="modal" href=".quick-view" class="btn viewBtn">Quick View</a></span>
         </div>
         <div class="media-body">

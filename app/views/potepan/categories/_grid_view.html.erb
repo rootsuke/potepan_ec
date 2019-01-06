@@ -1,9 +1,20 @@
 <div class="row equal-height" id="grid_view">
-  <% @products.each do |product| %>
+  <% if @products.empty? %>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="products-not-found">
+        <h3>商品が見つかりませんでした</h3>
+      </div>
+    </div>
+  <% end %>
+  <% @products.each_with_index do |product, i| %>
     <div class="col-sm-4 col-xs-12">
       <div class="productBox">
         <div class="productImage clearfix">
-          <%= image_tag(product.display_image.attachment.url, alt: "products-img") %>
+          <% if params[:option_type] == "color" %>
+            <%= image_tag(@variants[i].display_image.attachment.url, alt: "products-img") %>
+          <% else %>
+            <%= image_tag(product.display_image.attachment.url, alt: "products-img") %>
+          <% end %>
           <div class="productMasking">
             <ul class="list-inline btn-group" role="group">
               <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart"></i></a></li>
