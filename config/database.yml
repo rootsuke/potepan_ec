@@ -18,6 +18,8 @@ default: &default
   username: <%= ENV['MYSQL_USERNAME'] || 'root' %>
   password: <%= ENV['MYSQL_PASSWORD'] || '' %>
   socket: /tmp/mysql.sock
+  variables:
+    sql_mode: TRADITIONAL
 
 development:
   <<: *default
