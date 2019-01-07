@@ -2,9 +2,13 @@
   <div class="panel-heading">色から探す</div>
   <div class="panel-body">
     <ul class="list-unstyled">
-      <li><%= link_to "Red",   potepan_category_path(@taxon.id, option_type: "color", option_value: "red") %></li>
-      <li><%= link_to "Green", potepan_category_path(@taxon.id, option_type: "color", option_value: "green") %></li>
-      <li><%= link_to "Blue",  potepan_category_path(@taxon.id, option_type: "color", option_value: "blue") %></li>
+      <% @colors.each do |color| %>
+        <li>
+          <%= link_to potepan_category_path(@taxon.id, option_type: "color", option_value: color) do %>
+            <%= "#{color} (#{@the_number_of_products_in_option[color] ||= 0})" %>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

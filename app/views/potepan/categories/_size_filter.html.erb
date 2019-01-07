@@ -3,10 +3,13 @@
   <div class="panel-heading">サイズから探す</div>
   <div class="panel-body">
     <ul class="list-unstyled clearfix">
-      <li><%= link_to "S",  potepan_category_path(@taxon.id, option_type: "size", option_value: "s") %></li>
-      <li><%= link_to "M",  potepan_category_path(@taxon.id, option_type: "size", option_value: "m") %></li>
-      <li><%= link_to "L",  potepan_category_path(@taxon.id, option_type: "size", option_value: "l") %></li>
-      <li><%= link_to "XL", potepan_category_path(@taxon.id, option_type: "size", option_value: "xl") %></li>
+      <% @sizes.each do |size| %>
+        <li>
+          <%= link_to potepan_category_path(@taxon.id, option_type: "size", option_value: size) do %>
+            <%= "#{size} (#{@the_number_of_products_in_option[size] ||= 0})" %>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
