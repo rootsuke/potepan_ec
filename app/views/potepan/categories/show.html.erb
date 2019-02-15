@@ -16,13 +16,10 @@
       <div class="col-md-9 col-sm-8 col-xs-12">
         <div class="row filterArea">
           <div class="col-xs-6">
-            <select name="guiest_id1" id="guiest_id1" class="select-drop">
-              <option value="0">並び替え</option>
-              <option value="1">人気順</option>
-              <option value="2">安い順</option>
-              <option value="3">新着順</option>
-              <option value="3">高い順</option>
-            </select>
+            <%= form_tag(potepan_category_path(params[:id]), method: :get) do %>
+              <%= select_tag "order", options_for_select({"新着順": "new","古い順": "old", "価格の安い順": "price-asc", "価格の高い順": "price-desc"}), prompt: "並び替え", class: "select-drop" %>
+              <%= submit_tag "選択", name: "", class: "btn btn-primary" %>
+            <% end %>
           </div>
           <div class="col-xs-6">
             <div class="btn-group pull-right" id="switching_view_btn" role="group">
