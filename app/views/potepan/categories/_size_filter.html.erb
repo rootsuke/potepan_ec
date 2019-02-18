@@ -5,7 +5,7 @@
     <ul class="list-unstyled clearfix">
       <% @sizes.each do |size| %>
         <li>
-          <%= link_to potepan_category_path(@taxon.id, option_type: "size", option_value: size) do %>
+          <%= link_to potepan_category_path(@taxon.id, option_type: "size", option_value: size, sort: params[:sort]) do %>
             <%= "#{size} (#{@the_number_of_products_in_option[size] ||= 0})" %>
           <% end %>
         </li>

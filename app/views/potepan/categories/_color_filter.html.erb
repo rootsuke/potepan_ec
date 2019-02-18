@@ -4,7 +4,7 @@
     <ul class="list-unstyled">
       <% @colors.each do |color| %>
         <li>
-          <%= link_to potepan_category_path(@taxon.id, option_type: "color", option_value: color) do %>
+          <%= link_to potepan_category_path(@taxon.id, option_type: "color", option_value: color, sort: params[:sort]) do %>
             <%= "#{color} (#{@the_number_of_products_in_option[color] ||= 0})" %>
           <% end %>
         </li>

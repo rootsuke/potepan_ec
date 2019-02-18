@@ -6,6 +6,11 @@ Spree::Product.class_eval do
       where.not(id: id).distinct.pluck(:id).sample(NUMBER_OF_RELATED_PRODUCTS)
   end
 
+  def self.sort_by_option(option)
+    option ||= :new
+    reorder(nil).send("sort_by_#{option}")
+  end
+
   scope :includes_images_and_price, -> { includes(master: [:images, :default_price]) }
 
   scope :related_products_of, -> (product) do
@@ -18,4 +23,12 @@ Spree::Product.class_eval do
   scope :filter_by_option, -> (option_value) do
     joins(variants: :option_values).where(spree_option_values: { presentation: option_value }) if option_value.present?
   end
+
+  scope :sort_by_new, -> { order(available_on: :desc) }
+
+  scope :sort_by_old, -> { order(available_on: :asc) }
+
+  scope :sort_by_price_asc, -> { order("spree_prices.amount ASC") }
+
+  scope :sort_by_price_desc, -> { order("spree_prices.amount DESC") }
 end

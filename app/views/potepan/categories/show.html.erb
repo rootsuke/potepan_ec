@@ -17,16 +17,18 @@
         <div class="row filterArea">
           <div class="col-xs-6">
             <%= form_tag(potepan_category_path(params[:id]), method: :get) do %>
-              <%= select_tag "order", options_for_select({"新着順": "new","古い順": "old", "価格の安い順": "price-asc", "価格の高い順": "price-desc"}), prompt: "並び替え", class: "select-drop" %>
+              <%= select_tag "sort", options_for_select({"新着順": "new","古い順": "old", "価格の安い順": "price_asc", "価格の高い順": "price_desc"}, selected: params[:sort]), onchange: "this.form.submit()", class: "select-drop" %>
+              <%= hidden_field_tag(:option_type, params[:option_type]) %>
+              <%= hidden_field_tag(:option_value, params[:option_value]) %>
               <%= submit_tag "選択", name: "", class: "btn btn-primary" %>
             <% end %>
           </div>
           <div class="col-xs-6">
             <div class="btn-group pull-right" id="switching_view_btn" role="group">
-              <%= link_to potepan_category_path(@taxon.id, view_type: "grid", option_type: params[:option_type], option_value: params[:option_value]), id: "grid_btn", class: "btn btn-default #{"active" if @view_type == "grid"}", remote: true do %>
+              <%= link_to potepan_category_path(@taxon.id, view_type: "grid", option_type: params[:option_type], option_value: params[:option_value], sort: params[:sort]), id: "grid_btn", class: "btn btn-default #{"active" if @view_type == "grid"}", remote: true do %>
                 <i class="fa fa-th" aria-hidden="true"></i><span>Grid</span>
               <% end %>
-              <%= link_to potepan_category_path(@taxon.id, view_type: "list", option_type: params[:option_type], option_value: params[:option_value]), id: "list_btn", class: "btn btn-default #{"active" if @view_type == "list"}", remote: true do %>
+              <%= link_to potepan_category_path(@taxon.id, view_type: "list", option_type: params[:option_type], option_value: params[:option_value], sort: params[:sort]), id: "list_btn", class: "btn btn-default #{"active" if @view_type == "list"}", remote: true do %>
                 <i class="fa fa-th-list" aria-hidden="true"></i><span>List</span>
               <% end %>
             </div>
