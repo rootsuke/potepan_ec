@@ -1,2 +1,2 @@
-project-docs/* linguist-documentation
-app/assets/**/* linguist-documentation=false
+app/views/**/* linguist-documentation
+app/assets/**/* linguist-documentation
